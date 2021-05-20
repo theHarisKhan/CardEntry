@@ -1,0 +1,65 @@
+.card {
+  position: relative;
+  background: white;
+  height: fit-content;
+  padding: 6px;
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: transform 350ms ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card__img {
+  position: absolute;
+  top: -30px;
+  right: -20px;
+
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.card__img img {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  font-size: 36px;
+  text-transform: capitalize;
+  line-height: 0;
+}
+
+.card__info h4 {
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 0.8;
+  margin-bottom: 0;
+}
+
+.card__info h5 {
+  color: #3d3c3c;
+  font-weight: 500;
+  border-top: 6px double #787aff;
+  padding-top: 6px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 26px;
+}
+
+.skills {
+  margin-left: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 550px) {
+  .card__img {
+    top: -22px;
+    right: -7px;
+  }
+}

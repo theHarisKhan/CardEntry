@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Card from './Card/Card';
+import Form from './Form/Form';
+import firebase from 'firebase'
+import {storage} from './firebase'
+import db from './firebase'
 
 function App() {
+  const [cards, setCards] = useState([])
+  const [loading, setLoading] = useState(false)
+  
+
+  useEffect(() => {
+    db.collection('users')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+        setCards(snapshot.docs.map((doc) => (
+          {
+            id: doc.id,
+            data: doc.data()
+          }
+        )))
+      })
+      setLoading(true)
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Form />
+
+      <div className="grid">
+        {loading ? (cards.map((item) => (
+          <Card {...item.data}/>
+        ))) : (
+          <>
+            <h1 className="Loading">Loading....</h1>
+          </>
+        )}
+      </div>
+
     </div>
   );
 }
